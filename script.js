@@ -73,6 +73,20 @@ async function fetchCommunityPosts() {
   }
 }
 
+// Set main-content margin-top to header height
+function setMainContentMargin() {
+  const header = document.querySelector("header");
+  const mainContent = document.querySelector(".main-content");
+  if (header && mainContent) {
+    const headerHeight = header.offsetHeight;
+    mainContent.style.marginTop = `${headerHeight + 10}px`; // Add 10px buffer
+  }
+}
+
+// Run on load and resize
+window.addEventListener("load", setMainContentMargin);
+window.addEventListener("resize", setMainContentMargin);
+
 // Fetch price and community posts on page load
 fetchAssdaqPrice();
 fetchCommunityPosts();
