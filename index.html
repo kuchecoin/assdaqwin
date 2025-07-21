@@ -5,162 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ASSDAQ - Flip the NASDAQ</title>
   <link rel="icon" type="image/png" href="assdaq11.png" />
-  
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-
-    body {
-      background: #f9f9f9;
-      color: #333;
-      min-height: 100vh;
-    }
-
-    header {
-      background: #fff;
-      padding: 15px;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      border-bottom: 1px solid #ddd;
-    }
-
-    header img.logo {
-      width: 60px;
-      height: auto;
-      display: block;
-      margin: 0 auto 10px;
-    }
-
-    header h1 {
-      font-size: 1.5em;
-      text-align: center;
-      font-weight: 600;
-    }
-
-    header p.tagline {
-      font-size: 0.9em;
-      text-align: center;
-      color: #666;
-      margin: 5px 0;
-    }
-
-    .contract-container {
-      background: #ffe066;
-      padding: 8px;
-      border-radius: 6px;
-      font-size: 0.85em;
-      margin: 10px auto;
-      max-width: 90%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .contract-text {
-      flex-grow: 1;
-      word-break: break-all;
-    }
-
-    .copy-btn {
-      background: #333;
-      color: #fff;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 4px;
-      font-size: 0.8em;
-      cursor: pointer;
-      margin-left: 8px;
-    }
-
-    .copy-btn:hover {
-      background: #555;
-    }
-
-    .price-display {
-      font-size: 1em;
-      text-align: center;
-      margin: 10px 0;
-      color: #333;
-    }
-
-    .price-display.loading {
-      color: #666;
-      font-style: italic;
-    }
-
-    .main-content {
-      margin-top: 240px; /* Adjusted for extra tagline */
-      padding: 15px;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-
-    .gallery img {
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
-    }
-
-    footer {
-      background: #fff;
-      padding: 15px;
-      border-top: 1px solid #ddd;
-      text-align: center;
-    }
-
-    .description {
-      font-size: 0.9em;
-      color: #666;
-      margin-bottom: 10px;
-    }
-
-    .cta {
-      display: inline-block;
-      padding: 8px 15px;
-      background: #ffe066;
-      color: #333;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 0.9em;
-      margin: 5px;
-    }
-
-    .cta:hover {
-      background: #ffd633;
-    }
-
-    .socials {
-      margin-top: 10px;
-    }
-
-    .social-icon {
-      font-size: 1.8em;
-      margin: 0 10px;
-      color: #333;
-      text-decoration: none;
-      transition: transform 0.2s, color 0.2s;
-    }
-
-    .social-icon:hover {
-      transform: scale(1.2);
-      color: #000;
-    }
-
-    @media (min-width: 600px) {
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
@@ -181,6 +26,16 @@
   </header>
 
   <section class="main-content">
+    <section class="community-posts">
+      <h2>Community Raids</h2>
+      <p class="community-instructions">
+        Want your community post to appear here? File an issue or create a pull request to add your post to 
+        <a href="https://github.com/kuchecoin/assdaqwin/issues" class="cta" target="_blank" rel="noopener noreferrer">our GitHub repo</a>!
+      </p>
+      <div id="community-links" class="community-links">
+        <p>Loading community posts...</p>
+      </div>
+    </section>
     <div class="gallery">
       <img src="assdaq1.png" alt="ASSDAQ Image 1" />
       <img src="assdaq2.png" alt="ASSDAQ Image 2" />
@@ -216,54 +71,7 @@
     </div>
   </footer>
 
-  <script>
-    // Copy Contract Address Function
-    function copyContractAddress() {
-      const contractAddress = "7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump";
-      navigator.clipboard
-        .writeText(contractAddress)
-        .then(() => {
-          alert("Contract address copied to clipboard!");
-        })
-        .catch((err) => {
-          console.error("Failed to copy: ", err);
-          alert("Failed to copy the contract address.");
-        });
-    }
-
-    // Fetch ASSDAQ Price
-    async function fetchAssdaqPrice() {
-      const priceDisplay = document.getElementById("price-display");
-      try {
-        const response = await fetch(
-          "https://solana-gateway.moralis.io/token/mainnet/7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump/price",
-          {
-            method: "GET",
-            headers: {
-              accept: "application/json",
-              "X-API-Key":
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImNmOTMyMmZkLTI5NDktNDRkMi1hNDM4LTA3YmRhOGM4YTE2YSIsIm9yZ0lkIjoiNDU3NTU0IiwidXNlcklkIjoiNDcwNzU0IiwidHlwZUlkIjoiNmE3NmRmYjEtNGQ1Yi00NGNkLWIyMWItYWVjMTk0Y2MyNDA2IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3NTE2NjI0OTMsImV4cCI6NDkwNzQyMjQ5M30.XwkXkmtaWA-PVk-Fo8Mu7TtRyd6JUGQCIZOaZmGDYSo",
-            },
-          }
-        );
-        const data = await response.json();
-        if (data.usdPrice) {
-          priceDisplay.textContent = `ASSDAQ Price: $${parseFloat(
-            data.usdPrice
-          ).toFixed(6)} USD`;
-          priceDisplay.classList.remove("loading");
-        } else {
-          priceDisplay.textContent = "Price unavailable";
-        }
-      } catch (error) {
-        console.error("Failed to fetch price:", error);
-        priceDisplay.textContent = "Error fetching price";
-      }
-    }
-
-    // Fetch price on page load
-    fetchAssdaqPrice();
-  </script>
-<script src="https://kit.fontawesome.com/b047fc2726.js" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+  <script src="https://kit.fontawesome.com/b047fc2726.js" crossorigin="anonymous"></script>
 </body>
 </html>
