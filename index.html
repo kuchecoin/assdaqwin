@@ -19,7 +19,7 @@
       --card-border: #1a2634;
       --text: #e6f9fb;
       --text-muted: #9fbec3;
-      --accent: #00B4CB;
+      --accent: hsl(187, 100%, 40%);
       --accent-hover: #008fa1;
       --glass: rgba(0, 180, 203, 0.1);
     }
@@ -84,12 +84,11 @@
     ========================================================= */
     header {
       position: relative;
+      width: 100%;
       background: rgba(7,16,24,0.95);
       padding: 20px 15px 25px;
       border-bottom: 1px solid var(--card-border);
       box-shadow: 0 4px 20px rgba(0,180,203,0.1);
-      max-height: 95vh;
-      overflow-y: auto;
     }
 
     .hero-cover {
@@ -258,6 +257,7 @@
     }
 
     .bridge-container {
+      min-height: 70vh;
       margin-top: 10px;
       height: 820px;
       border-radius: 8px;
@@ -394,7 +394,8 @@
     <div class="socials">
       <a href="https://www.facebook.com/groups/1922875365225468/?ref=share" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
       <a href="https://www.reddit.com/r/assdaq/" class="social-icon" aria-label="Reddit"><i class="fa-brands fa-reddit-alien"></i></a>
-      <a href="https://x.com/kuchecoin" class="social-icon" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://x.com/assdaqcrypto" class="social-icon" aria-label="X assdaq"><i class="fa-brands fa-x-twitter" style="color: #00b4cc;"></i></a>
+      <a href="https://x.com/kuchecoin" class="social-icon" aria-label="X kuchecoin"><i class="fa-brands fa-x-twitter"></i></a>
       <a href="https://www.instagram.com/not_a_trader___believer" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
     </div>
   </footer>
