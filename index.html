@@ -10,16 +10,11 @@
   <script src="https://kit.fontawesome.com/b047fc2726.js" crossorigin="anonymous"></script>
 
   <style>
-
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-    }
+    /* =========================================================
+      VARIABLES
+    ========================================================= */
     :root {
-      --bg: #000000;
+      --bg: #000;
       --card: #071018;
       --card-border: #1a2634;
       --text: #e6f9fb;
@@ -29,6 +24,9 @@
       --glass: rgba(0, 180, 203, 0.1);
     }
 
+    /* =========================================================
+      RESET & BASE
+    ========================================================= */
     * {
       margin: 0;
       padding: 0;
@@ -44,148 +42,30 @@
       flex-direction: column;
     }
 
-    /* --- Typography --- */
-    h1, h2, h3 {
-      color: var(--text);
-      font-weight: 700;
-    }
-
     a {
       color: var(--accent);
       text-decoration: none;
       transition: all 0.2s ease;
     }
-    
+
     a:hover {
       color: #fff;
       text-shadow: 0 0 5px var(--accent);
     }
 
-    header {
-      position: relative; /* NOT fixed, NOT sticky */
-      background: rgba(7, 16, 24, 0.95);
-      padding: 20px 15px 25px;
-      width: 100%;
-      border-bottom: 1px solid var(--card-border);
-      box-shadow: 0 4px 20px rgba(0, 180, 203, 0.1);
+    h1, h2, h3 {
+      font-weight: 700;
     }
 
-
-    /* Cover Image Styles */
-    .hero-cover {
-        width: 100%;
-        margin-bottom: 15px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .cover-img {
-        width: 100%;
-        max-width: 600px; /* Prevent it from being too huge on desktop */
-        height: auto;
-        border-radius: 8px;
-        object-fit: cover;
-    }
-
-    header img.logo {
-      width: 300px;
-      height: auto;
-      display: block;
-      margin: 0 auto 10px;
-      filter: drop-shadow(0 0 5px var(--accent));
-    }
-
-    header h1 {
-      font-size: 1.8em;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 5px;
-    }
-
-    header p.tagline {
-      font-size: 0.9em;
-      text-align: center;
-      color: var(--text-muted);
-      margin: 4px 0;
-    }
-
-    /* --- Contract Box --- */
-    .contract-container {
-      background: var(--card);
-      border: 1px solid var(--accent);
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 1em;
-      margin: 15px auto;
-      max-width: 700px;
-      width: 95%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 0 15px rgba(0, 180, 203, 0.15);
-    }
-
-    .contract-text {
-      width: 600px;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 1.1em;
-    }
-
-    .contract-text a {
-      width: 500px;
-      color: var(--accent);
-      font-family: monospace;
-      display: block; /* Stack on mobile */
-      margin-top: 2px;
-      word-break: break-all;
-      font-size: 1.1em;
-    }
-
-    .copy-btn {
-      margin-top: 6px;
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 6px 15px;
-      border-radius: 4px;
-      font-size: 0.8em;
-      cursor: pointer;
-      font-weight: bold;
-      text-transform: uppercase;
-      transition: 0.2s;
-    }
-
-    .copy-btn:hover {
-      background: var(--accent);
-      color: #000;
-      box-shadow: 0 0 10px var(--accent);
-    }
-
-    /* --- Contract Links --- */
-    .contract-links {
-      text-align: center;
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .price-display {
-      font-size: 1em;
-      text-align: center;
-      margin: 15px 0 5px;
-      color: var(--text);
-      font-weight: bold;
-    }
-
-    .price-display.loading {
-      color: var(--text-muted);
-      font-style: italic;
-      animation: pulse 1.5s infinite;
+    /* =========================================================
+      ANIMATIONS
+    ========================================================= */
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
     }
 
     @keyframes pulse {
@@ -194,96 +74,219 @@
       100% { opacity: 0.6; }
     }
 
-    /* --- Main Layout --- */
-    .main-content {
-      padding: 15px;
-      /* Margin top is set by JS now */
-      flex: 1;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
+    @keyframes glowPulse {
+      from { opacity: 0.8; }
+      to { opacity: 1; }
+    }
+
+    /* =========================================================
+      HEADER / HERO
+    ========================================================= */
+    header {
+      position: relative;
+      background: rgba(7,16,24,0.95);
+      padding: 20px 15px 25px;
+      border-bottom: 1px solid var(--card-border);
+      box-shadow: 0 4px 20px rgba(0,180,203,0.1);
+      max-height: 95vh;
+      overflow-y: auto;
+    }
+
+    .hero-cover {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .cover-img {
       width: 100%;
-    }
-
-    @media (max-width: 600px) {
-      .contract-container {
-        font-size: 1em;
-      }
-    }
-
-    /* --- Bridge Section --- */
-    .bridge-section {
-        margin: 30px;
-        background: var(--card);
-        border: 1px solid var(--card-border);
-        border-radius: 12px;
-        padding: 20px;
-        text-align: center;
-    }
-
-    .bridge-container {
-        margin-top: 10px;
-        position: relative;
-        width: 100%;
-        height: 700px;
-        background: #000;
-        border-radius: 8px;
-        border: 1px solid var(--accent);
-        overflow: hidden;
-    }
-
-    .bridge-iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-
-    /* --- Footer --- */
-    footer {
-      background: var(--card);
-      padding: 30px 15px;
-      border-top: 1px solid var(--accent);
-      text-align: center;
-      margin-top: auto;
-    }
-
-    .description {
-      font-size: 0.9em;
-      color: var(--text-muted);
-      margin-bottom: 20px;
       max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      border-radius: 8px;
     }
 
-    /* --- CTAs (Buttons/Links) --- */
-    .cta {
-      display: inline-block;
-      padding: 8px 16px;
-      background: transparent;
-      color: var(--accent);
+    header img.logo {
+      width: 300px;
+      margin: 0 auto 10px;
+      display: block;
+      filter: drop-shadow(0 0 5px var(--accent));
+    }
+
+    .glow-title {
+      font-size: 2.2em;
+      text-align: center;
+      letter-spacing: 2px;
+      text-shadow:
+        0 0 8px rgba(0,180,203,0.6),
+        0 0 18px rgba(0,180,203,0.3);
+      animation: glowPulse 2.5s infinite alternate;
+    }
+
+    /* =========================================================
+      CONTRACT BOX
+    ========================================================= */
+    .contract-container {
+      background: var(--card);
       border: 1px solid var(--accent);
-      text-decoration: none;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 15px auto;
+      max-width: 700px;
+      width: 95%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 0 15px rgba(0,180,203,0.15);
+    }
+
+    .contract-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 8px;
+      margin: 10px auto 0;
+      max-width: 700px;
+    }
+
+    .contract-links .cta:hover {
+      transform: translateY(-1px);
+    }
+
+    .contract-links .cta {
+      white-space: nowrap;
+      flex: 0 1 auto;
+    }
+
+    .contract-text {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.1em;
+    }
+
+    .contract-text span {
+      color: var(--text);
+    }
+
+    .contract-text a {
+      display: block;
+      margin-top: 4px;
+
+      font-family: monospace;
+      font-size: 1.1em;
+      color: var(--accent);
+      text-shadow: 0 0 6px rgba(0,180,203,0.4);
+
+      /* Desktop default */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* =========================================================
+      BUTTONS
+    ========================================================= */
+    .copy-btn,
+    .cta {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
       border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .copy-btn {
+      margin-top: 6px;
+      padding: 6px 15px;
+      font-size: 0.8em;
+      text-transform: uppercase;
+    }
+
+    .cta {
+      padding: 8px 16px;
       font-size: 0.85em;
       margin: 4px;
-      font-weight: 600;
-      transition: all 0.2s;
     }
 
+    .copy-btn:hover,
     .cta:hover {
       background: var(--accent);
       color: #000;
       box-shadow: 0 0 10px var(--accent);
     }
 
-    .cta:active,
-    .copy-btn:active {
+    .copy-btn:active,
+    .cta:active {
       transform: scale(0.96);
       box-shadow: 0 0 6px rgba(0,180,203,0.8) inset;
     }
 
-    /* --- Social Icons --- */
+    /* =========================================================
+      PRICE
+    ========================================================= */
+    .price-display {
+      text-align: center;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    .price-display.loading {
+      color: var(--text-muted);
+      animation: pulse 1.5s infinite;
+    }
+
+    /* =========================================================
+      MAIN & BRIDGE
+    ========================================================= */
+    .main-content {
+      padding: 15px;
+      max-width: 1200px;
+      margin: auto;
+      flex: 1;
+    }
+
+    .bridge-section {
+      margin: 30px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .bridge-container {
+      margin-top: 10px;
+      height: 820px;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      overflow: hidden;
+    }
+
+    .bridge-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* =========================================================
+      FOOTER & SOCIALS
+    ========================================================= */
+    footer {
+      background: var(--card);
+      padding: 30px 15px;
+      border-top: 1px solid var(--accent);
+      text-align: center;
+    }
+
+    .description {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+
     .socials {
       margin-top: 20px;
     }
@@ -292,7 +295,7 @@
       font-size: 1.5em;
       margin: 0 12px;
       color: var(--text-muted);
-      transition: all 0.2s;
+      transition: 0.2s;
     }
 
     .social-icon:hover {
@@ -301,90 +304,41 @@
       text-shadow: 0 0 8px var(--accent);
     }
 
-    /* --- Responsive Tweaks --- */
+    /* =========================================================
+      RESPONSIVE
+    ========================================================= */
+    @media (max-width: 480px) {
+      .contract-text a {
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;        /* EXACTLY 2 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: break-all;
+        line-height: 1.4;
+        text-align: center;
+      }
+
+      .contract-links .cta {
+        flex: 1 1 45%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header img.logo { width: 220px; }
+      .hero-cover { margin-bottom: 8px; }
+      .contract-container { margin: 10px auto; }
+    }
+
     @media (min-width: 600px) {
       .contract-container {
         flex-direction: row;
         justify-content: space-between;
-        text-align: left;
-        font-size: 1.1em;
         padding: 16px;
       }
-      .contract-text {
-        text-align: left;
-      }
-      .contract-text a {
-        display: inline;
-        margin-left: 5px;
-        display: block;
-        font-family: monospace;
-        font-size: 1.25em;
-        font-weight: bold;
-        color: #00f0ff;
-        margin-top: 4px;
-        word-break: break-all;
-        text-shadow: 0 0 6px rgba(0, 180, 203, 0.6);
-      }
-      .contract-text span {
-        font-size: 0.85em;
-        opacity: 0.8;
-      }
-      header img.logo {
-        width: 300px;
-      }
-      
+      .contract-text { text-align: left; }
     }
-    header {
-      max-height: 95vh;
-      overflow-y: auto;
-    }
-    @media (max-width: 600px) {
-
-      header img.logo {
-        width: 220px;
-      }
-
-      .cover-img {
-        max-width: 100%;
-      }
-      header {
-        padding-bottom: 10px;
-      }
-
-        .hero-cover {
-          margin-bottom: 8px;
-        }
-
-        .contract-container {
-          margin: 10px auto;
-        }
-
-        .contract-links {
-          margin-bottom: 10px;
-        }
-      }
-      .price-display {
-        margin-top: 10px;
-      }
-
-      .bridge-section {
-        margin-top: 20px;
-      }
-
-      .glow-title {
-        font-size: 2.2em;
-        text-align: center;
-        letter-spacing: 2px;
-        text-shadow:
-          0 0 8px rgba(0,180,203,0.6),
-          0 0 18px rgba(0,180,203,0.3);
-        animation: glowPulse 2.5s infinite alternate;
-      }
-
-      @keyframes glowPulse {
-        from { opacity: 0.8; }
-        to { opacity: 1; }
-      }
 
   </style>
 </head>
@@ -398,8 +352,9 @@
     <div class="contract-container">
       <div class="contract-text">
         <div><span style="color:var(--text)">Solana:</span> <a href="https://solscan.io/token/7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump" target="_blank">7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump</a></div>
-        <button class="copy-btn" onclick="copyContractAddress()">Copy Solana CA</button>
+        <button class="copy-btn copy-sol-ca" onclick="copySolContractAddress()">Copy Solana CA</button>
         <div style="margin-top:4px;"><span style="color:var(--text)">Ethereum:</span> <a href="https://etherscan.io/token/0xF4F53989d770458B659f8D094b8E31415F68A4Cf" target="_blank">0xF4F53989d770458B659f8D094b8E31415F68A4Cf</a></div>
+        <button class="copy-btn copy-eth-ca" onclick="copyEthContractAddress()">Copy Ethereum CA</button>
       </div>
     </div>
 
@@ -445,14 +400,32 @@
   </footer>
   <script>
     // 1. Copy Contract Address Function (Updated to avoid alerts)
-    function copyContractAddress() {
+    function copySolContractAddress() {
       const contractAddress = "7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump";
       
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard
           .writeText(contractAddress)
           .then(() => {
-            showCopiedFeedback();
+            showCopiedFeedback('.copy-sol-ca', 'Copy Solana CA');
+          })
+          .catch((err) => {
+            console.error("Failed to copy: ", err);
+            fallbackCopy(contractAddress);
+          });
+      } else {
+        fallbackCopy(contractAddress);
+      }
+    }
+
+    function copyEthContractAddress() {
+      const contractAddress = "0xF4F53989d770458B659f8D094b8E31415F68A4Cf";
+      
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard
+          .writeText(contractAddress)
+          .then(() => {
+            showCopiedFeedback('.copy-eth-ca', 'Copy Ethereum CA');
           })
           .catch((err) => {
             console.error("Failed to copy: ", err);
@@ -480,15 +453,15 @@
       document.body.removeChild(textArea);
     }
 
-    function showCopiedFeedback() {
-      const btn = document.querySelector('.copy-btn');
+    function showCopiedFeedback(selector, origText) {
+      const btn = document.querySelector(selector);
       const originalText = btn.innerText;
       btn.innerText = "COPIED!";
       btn.style.background = "#00B4CB";
       btn.style.color = "#000";
       
       setTimeout(() => {
-        btn.innerText = "Copy CA"; // Reset to default text
+        btn.innerText = origText; // Reset to default text
         btn.style.background = "transparent";
         btn.style.color = "#00B4CB";
       }, 2000);
