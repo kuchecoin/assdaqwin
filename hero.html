@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ASSDAQ - Worlds Best Asset</title>
+  <link rel="icon" type="image/png" href="assets/logo1.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Raleway:wght@300;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================================
+       Global Reset
+    ================================ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Montserrat', system-ui, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+
+    /* ================================
+       Background Video
+    ================================ */
+    .video-wrapper-front { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
+    .video-wrapper-front video { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+    /* ================================
+       Gradient Overlay
+    ================================ */
+    .video-gradient-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 45%, rgba(4,204,242,0.22) 100%);
+    }
+
+    /* ================================
+       Hero Content
+    ================================ */
+    .content-container { position: relative; z-index: 2; width: 100%; }
+    .hero { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; display: flex; justify-content: center; align-items: flex-start; padding-top: 16px; z-index: 2; }
+
+    .logo-container { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+    .logo-container img { width: 200px; max-width: 80vw; height: auto; }
+    .tagline { margin-top: 12px; font-family: 'Raleway','Montserrat',system-ui,sans-serif; font-size: 22px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: rgb(255, 255, 255); }
+
+    /* ================================
+       Tabs / Text Buttons
+    ================================ */
+    .tabs-container { margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .tab-button {
+      display: flex; align-items: center; justify-content: center;
+      padding: 10px 20px; background-color: rgba(255,255,255,0.1);
+      border-radius: 6px; transition: background-color 0.2s, transform 0.2s;
+      text-decoration: none; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 600;
+    }
+    .tab-button:hover { background-color: rgba(4, 204, 242, 1); transform: translateY(-2px); }
+
+    .top-left-text-nav {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 3;
+
+  display: flex;
+  gap: 18px;
+}
+
+.text-nav-link {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+
+  transition: color 0.2s, transform 0.2s;
+}
+
+.text-nav-link:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+    /* ================================
+       Info Box
+    ================================ */
+    .info-box {
+      margin-top: 24px;
+      background-color: rgba(24, 24, 24, 0.378);
+      padding: 16px 24px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 620px;
+      width: 90%;
+      text-align: left;
+    }
+
+    .contract-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .contract-label {
+      font-weight: 600;
+      color: #ffffff;
+      flex: 1 1 auto;
+    }
+
+    .contract-address {
+      background-color: rgba(15, 15, 15, 0.481); 
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      overflow-x: auto;
+      flex: 2 1 auto;
+    }
+
+    .copy-btn {
+      background-color: rgb(255,255,255,0.1);
+      color: #ffffff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .copy-btn:hover { background-color: rgba(4, 204, 242, 1); }
+
+    /* ================================
+       Responsive Adjustments
+    ================================ */
+    @media (max-width: 600px) {
+      .logo-container img { width: 180px; }
+      .tagline { font-size: 12px; letter-spacing: 0.15em; }
+      .tab-button { font-size: 12px; padding: 8px 16px; }
+    }
+
+    .price-box {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  padding: 10px 14px;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+
+  font-family: 'Montserrat', system-ui, sans-serif;
+
+  .price-box .change {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.price-box .change.positive {
+  color: #2dff9a;
+}
+
+.price-box .change.negative {
+  color: #ff4d4d;
+}
+
+}
+
+.price-box .price {
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+
+.price-box .value {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.price-box .marketcap {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ================================
+   Footer Disclaimer
+================================ */
+.footer-disclaimer {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+
+  text-align: center;
+  font-size: 10px;
+  color: rgba(255,255,255,0.55);
+  max-width: 900px;
+  padding: 0 20px;
+  line-height: 1.4;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Live Price Box -->
+<div class="price-box" id="price-box">
+  <span class="price">$ASSDAQ</span>
+  <span class="value" id="assdaq-price">Loading...</span>
+  <span class="change" id="assdaq-change"></span>
+  <span class="marketcap" id="assdaq-mcap"></span>
+</div>
+
+  <!-- Background Video -->
+  <div class="video-wrapper-front">
+    <video autoplay muted loop playsinline>
+      <source src="assets/background.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Gradient Overlay -->
+  <div class="video-gradient-overlay"></div>
+
+  <!-- Hero Content -->
+  <div class="content-container">
+    <section class="hero">
+      <div class="logo-container">
+        <img src="assets/assdaq-logo.png" alt="ASSDAQ Logo">
+        <p class="tagline">Worlds Best Asset</p>
+
+        <!-- Top Left Text Navigation -->
+        <nav class="top-left-text-nav">
+          <a href="https://store.fun/assdaq" class="text-nav-link">Merch</a>
+          <a href="https://t.me/ASSDAQ_MEDIA" class="text-nav-link">Memes</a>
+          <a href="https://assdaqgenerator.com/" class="text-nav-link">Generator</a>
+        </nav>
+
+        <!-- Text Tabs -->
+        <div class="tabs-container">
+          <a href="https://x.com/i/communities/1954633055752388813" class="tab-button" target="_blank">X Community</a>
+          <a href="https://x.com/assdaqcrypto" class="tab-button" target="_blank">X Page</a>
+          <a href="https://dexscreener.com/solana/8r2fgpmpjilihbv6tzm21tqohgwny4vkvuan6rv2so2h" class="tab-button" target="_blank">Chart</a>
+          <a href="https://www.coingecko.com/en/coins/assdaq" class="tab-button" target="_blank">CoinGecko</a>
+        </div>
+
+        <!-- Contract Info Box -->
+        <div class="info-box">
+          <div class="contract-row">
+            <span class="contract-label">ASSDAQ (SOL):</span>
+            <span class="contract-address" id="solana-address">7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump</span>
+            <button class="copy-btn" onclick="copyToClipboard('solana-address', this)">Copy</button>
+          </div>
+          <div class="contract-row">
+            <span class="contract-label">ASSDAQ (ETH):</span>
+            <span class="contract-address" id="ethereum-address">0xF4F53989d770458B659f8D094b8E31415F68A4Cf</span>
+            <button class="copy-btn" onclick="copyToClipboard('ethereum-address', this)">Copy</button>
+          </div>
+
+          <!-- Buy Tabs -->
+<div class="tabs-container buy-tabs">
+  <a
+    href="https://jup.ag/tokens/7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump"
+    class="tab-button"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Buy on Solana
+  </a>
+
+  <a
+    href="https://bridge.assdaq.org"
+    class="tab-button"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Bridge
+  </a>
+
+  <a
+    href="https://app.uniswap.org/swap?chain=mainnet&inputCurrency=NATIVE&outputCurrency=0xF4F53989d770458B659f8D094b8E31415F68A4Cf"
+    class="tab-button"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Buy on Ethereum
+  </a>
+</div>
+
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Click to Copy Script -->
+  <script>
+  function copyToClipboard(id, button) {
+    const text = document.getElementById(id).textContent;
+
+    navigator.clipboard.writeText(text).then(() => {
+      const originalText = button.textContent;
+
+      button.textContent = 'Copied';
+      button.disabled = true;
+
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+      }, 1500);
+    }).catch(err => {
+      console.error('Copy failed:', err);
+    });
+  }
+</script>
+
+<script>
+  const SOLANA_TOKEN = "7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump";
+
+  async function fetchPrice() {
+    try {
+      const res = await fetch(
+        `https://api.dexscreener.com/latest/dex/tokens/${SOLANA_TOKEN}`
+      );
+      const data = await res.json();
+
+      if (!data.pairs || !data.pairs.length) return;
+
+      const pair = data.pairs[0];
+
+      const price = parseFloat(pair.priceUsd).toFixed(6);
+      const change = pair.priceChange?.h24 ?? 0;
+      const mcap = pair.fdv
+        ? `$${Number(pair.fdv).toLocaleString()}`
+        : "—";
+
+      const changeEl = document.getElementById("assdaq-change");
+
+      document.getElementById("assdaq-price").textContent = `$${price}`;
+      document.getElementById("assdaq-mcap").textContent = `MCAP ${mcap}`;
+
+      changeEl.textContent = `${change > 0 ? "+" : ""}${change.toFixed(2)}% (24h)`;
+      changeEl.className = `change ${change >= 0 ? "positive" : "negative"}`;
+
+    } catch (err) {
+      console.error("Price fetch failed", err);
+    }
+  }
+
+  fetchPrice();
+  setInterval(fetchPrice, 30000);
+</script>
+<!-- Footer Disclaimer -->
+<div class="footer-disclaimer">
+  $ASSDAQ is a volatile meme coin with no intrinsic value, no utility beyond entertainment, and no expectation of financial return.
+  $ASSDAQ is for satirical and entertainment purposes only and not backed by any assets, team, or roadmap.
+  When you purchase $ASSDAQ, you agree you've seen this disclaimer and accept all risks at your own expense.
+</div>
+
+</body>
+</html>
