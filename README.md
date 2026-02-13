@@ -1,2 +1,2 @@
-# assdaqwin
-assdaq.win - ASSDAQ promotional website.
+# assdaqorg
+assdaq.org - ASSDAQ promotional website.
