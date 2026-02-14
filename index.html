@@ -32,13 +32,77 @@
     /* ================================
        Hero Content
     ================================ */
-    .content-container { position: relative; z-index: 2; width: 100%; }
-    .hero { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; display: flex; justify-content: center; align-items: flex-start; padding-top: 16px; z-index: 2; }
+    .content-container { position: relative; z-index: 2; width: 100%; padding-bottom: 0; }
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: auto; /* shrink to fit content */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      z-index: 2;
+    }
 
     .logo-container { display: flex; flex-direction: column; align-items: center; text-align: center; }
 
     .logo-container img { width: 200px; max-width: 80vw; height: auto; }
     .tagline { margin-top: 12px; font-family: 'Raleway','Montserrat',system-ui,sans-serif; font-size: 22px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: rgb(255, 255, 255); }
+    
+    /* ================================
+   Live $ASSDAQ Price Box - Always Top Right
+================================ */
+  .price-box {
+  position: fixed;
+  top: 12px;       /* small padding from top */
+  right: 12px;     /* small padding from right */
+  z-index: 999;    /* ensure above video and overlay */
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #fff;
+  gap: 2px;
+}
+
+.price-box .price {
+  font-weight: 600;
+}
+
+.price-box .value {
+  font-weight: 500;
+}
+
+.price-box .change.positive {
+  color: #4ce13c;
+}
+
+.price-box .change.negative {
+  color: #ff3b3b;
+}
+
+.price-box .marketcap {
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+}
+
+/* Remove any mobile overrides */
+@media (max-width: 768px) {
+  .price-box {
+    /* Keep fixed top-right on mobile */
+    top: 12px;
+    right: 12px;
+    margin: 0;
+    text-align: right;
+    align-items: flex-end;
+  }
+}
 
     /* ================================
        Tabs / Text Buttons
@@ -53,32 +117,26 @@
     .tab-button:hover { background-color: rgba(4, 204, 242, 1); transform: translateY(-2px); }
 
     .top-left-text-nav {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 3;
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 3;
+      display: flex;
+      gap: 18px;
+    }
 
-  display: flex;
-  gap: 18px;
-}
+    .text-nav-link {
+      font-family: 'Montserrat', system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      transition: color 0.2s, transform 0.2s;
+    }
 
-.text-nav-link {
-  font-family: 'Montserrat', system-ui, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-
-  color: rgba(255, 255, 255, 0.85);
-  text-decoration: none;
-
-  transition: color 0.2s, transform 0.2s;
-}
-
-.text-nav-link:hover {
-  color: #ffffff;
-  transform: translateY(-1px);
-}
+    .text-nav-link:hover { color: #ffffff; transform: translateY(-1px); }
 
     /* ================================
        Info Box
@@ -96,133 +154,71 @@
       text-align: left;
     }
 
-    .contract-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .contract-label {
-      font-weight: 600;
-      color: #ffffff;
-      flex: 1 1 auto;
-    }
-
-    .contract-address {
-      background-color: rgba(15, 15, 15, 0.481); 
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 18px;
-      overflow-x: auto;
-      flex: 2 1 auto;
-    }
-
-    .copy-btn {
-      background-color: rgb(255,255,255,0.1);
-      color: #ffffff;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      transition: background-color 0.2s;
-    }
-
+    .contract-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    .contract-label { font-weight: 600; color: #ffffff; flex: 1 1 auto; }
+    .contract-address { background-color: rgba(15, 15, 15, 0.481); padding: 4px 8px; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 18px; overflow-x: auto; flex: 2 1 auto; }
+    .copy-btn { background-color: rgba(255,255,255,0.1); color: #ffffff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; transition: background-color 0.2s; }
     .copy-btn:hover { background-color: rgba(4, 204, 242, 1); }
+
+    /* ================================
+       Footer Disclaimer
+    ================================ */
+    .footer-disclaimer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      max-width: 900px;
+      margin: 20px auto 20px auto; /* reduced spacing */
+      padding: 0 10px;
+      line-height: 1.6;
+    }
 
     /* ================================
        Responsive Adjustments
     ================================ */
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .hero {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .footer-disclaimer {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        font-size: 13px;
+      }
       .logo-container img { width: 180px; }
       .tagline { font-size: 12px; letter-spacing: 0.15em; }
       .tab-button { font-size: 12px; padding: 8px 16px; }
+      .top-left-text-nav {
+        position: relative;
+        top: unset;
+        left: unset;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+      .price-box { position: relative; top: unset; right: unset; margin: 0 auto 20px auto; text-align: center; }
+      .tabs-container { flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+      .tab-button { width: 85%; text-align: center; }
+      .info-box { width: 92%; margin: 30px auto; }
+      .contract-row { flex-direction: column; align-items: stretch; }
+      .contract-address, .copy-btn { width: 100%; }
+      .buy-tabs-container { flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: 20px; }
+      .x-feed-container { display: none; }
     }
-
-    .price-box {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 3;
-
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(6px);
-  padding: 10px 14px;
-  border-radius: 8px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-
-  font-family: 'Montserrat', system-ui, sans-serif;
-
-  .price-box .change {
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.price-box .change.positive {
-  color: #2dff9a;
-}
-
-.price-box .change.negative {
-  color: #ff4d4d;
-}
-
-}
-
-.price-box .price {
-  font-size: 12px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
-}
-
-.price-box .value {
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.price-box .marketcap {
-  font-size: 11px;
-  color: rgba(255,255,255,0.6);
-}
-
-/* ================================
-   Footer Disclaimer
-================================ */
-.footer-disclaimer {
-  position: fixed;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-
-  text-align: center;
-  font-size: 10px;
-  color: rgba(255,255,255,0.55);
-  max-width: 900px;
-  padding: 0 20px;
-  line-height: 1.4;
-}
-
   </style>
 </head>
-
 <body>
-
   <!-- Live Price Box -->
-<div class="price-box" id="price-box">
-  <span class="price">$ASSDAQ</span>
-  <span class="value" id="assdaq-price">Loading...</span>
-  <span class="change" id="assdaq-change"></span>
-  <span class="marketcap" id="assdaq-mcap"></span>
-</div>
+  <div class="price-box" id="price-box">
+    <span class="price">$ASSDAQ</span>
+    <span class="value" id="assdaq-price">Loading...</span>
+    <span class="change" id="assdaq-change"></span>
+    <span class="marketcap" id="assdaq-mcap"></span>
+  </div>
 
   <!-- Background Video -->
   <div class="video-wrapper-front">
@@ -271,104 +267,61 @@
           </div>
 
           <!-- Buy Tabs -->
-<div class="tabs-container buy-tabs">
-  <a
-    href="https://jup.ag/tokens/7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump"
-    class="tab-button"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Buy on Solana
-  </a>
-
-  <a
-    href="https://bridge.assdaq.org"
-    class="tab-button"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Bridge
-  </a>
-
-  <a
-    href="https://app.uniswap.org/swap?chain=mainnet&inputCurrency=NATIVE&outputCurrency=0xF4F53989d770458B659f8D094b8E31415F68A4Cf"
-    class="tab-button"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Buy on Ethereum
-  </a>
-</div>
-
+          <div class="tabs-container buy-tabs">
+            <a href="https://jup.ag/tokens/7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump" class="tab-button" target="_blank" rel="noopener noreferrer">Buy on Solana</a>
+            <a href="https://bridge.assdaq.org" class="tab-button" target="_blank" rel="noopener noreferrer">Bridge</a>
+            <a href="https://app.uniswap.org/swap?chain=mainnet&inputCurrency=NATIVE&outputCurrency=0xF4F53989d770458B659f8D094b8E31415F68A4Cf" class="tab-button" target="_blank" rel="noopener noreferrer">Buy on Ethereum</a>
+          </div>
         </div>
-
       </div>
     </section>
   </div>
 
   <!-- Click to Copy Script -->
   <script>
-  function copyToClipboard(id, button) {
-    const text = document.getElementById(id).textContent;
-
-    navigator.clipboard.writeText(text).then(() => {
-      const originalText = button.textContent;
-
-      button.textContent = 'Copied';
-      button.disabled = true;
-
-      setTimeout(() => {
-        button.textContent = originalText;
-        button.disabled = false;
-      }, 1500);
-    }).catch(err => {
-      console.error('Copy failed:', err);
-    });
-  }
-</script>
-
-<script>
-  const SOLANA_TOKEN = "7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump";
-
-  async function fetchPrice() {
-    try {
-      const res = await fetch(
-        `https://api.dexscreener.com/latest/dex/tokens/${SOLANA_TOKEN}`
-      );
-      const data = await res.json();
-
-      if (!data.pairs || !data.pairs.length) return;
-
-      const pair = data.pairs[0];
-
-      const price = parseFloat(pair.priceUsd).toFixed(6);
-      const change = pair.priceChange?.h24 ?? 0;
-      const mcap = pair.fdv
-        ? `$${Number(pair.fdv).toLocaleString()}`
-        : "—";
-
-      const changeEl = document.getElementById("assdaq-change");
-
-      document.getElementById("assdaq-price").textContent = `$${price}`;
-      document.getElementById("assdaq-mcap").textContent = `MCAP ${mcap}`;
-
-      changeEl.textContent = `${change > 0 ? "+" : ""}${change.toFixed(2)}% (24h)`;
-      changeEl.className = `change ${change >= 0 ? "positive" : "negative"}`;
-
-    } catch (err) {
-      console.error("Price fetch failed", err);
+    function copyToClipboard(id, button) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = button.textContent;
+        button.textContent = 'Copied';
+        button.disabled = true;
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+        }, 1500);
+      }).catch(err => { console.error('Copy failed:', err); });
     }
-  }
+  </script>
 
-  fetchPrice();
-  setInterval(fetchPrice, 30000);
-</script>
-<!-- Footer Disclaimer -->
-<div class="footer-disclaimer">
-  $ASSDAQ is a volatile meme coin with no intrinsic value, no utility beyond entertainment, and no expectation of financial return.
-  $ASSDAQ is for satirical and entertainment purposes only and not backed by any assets, team, or roadmap.
-  When you purchase $ASSDAQ, you agree you've seen this disclaimer and accept all risks at your own expense.
-</div>
+  <script>
+    const SOLANA_TOKEN = "7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump";
 
+    async function fetchPrice() {
+      try {
+        const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${SOLANA_TOKEN}`);
+        const data = await res.json();
+        if (!data.pairs || !data.pairs.length) return;
+        const pair = data.pairs[0];
+        const price = parseFloat(pair.priceUsd).toFixed(6);
+        const change = pair.priceChange?.h24 ?? 0;
+        const mcap = pair.fdv ? `$${Number(pair.fdv).toLocaleString()}` : "—";
+        const changeEl = document.getElementById("assdaq-change");
+        document.getElementById("assdaq-price").textContent = `$${price}`;
+        document.getElementById("assdaq-mcap").textContent = `MCAP ${mcap}`;
+        changeEl.textContent = `${change > 0 ? "+" : ""}${change.toFixed(2)}% (24h)`;
+        changeEl.className = `change ${change >= 0 ? "positive" : "negative"}`;
+      } catch (err) { console.error("Price fetch failed", err); }
+    }
+
+    fetchPrice();
+    setInterval(fetchPrice, 30000);
+  </script>
+
+  <!-- Footer Disclaimer -->
+  <div class="footer-disclaimer">
+    $ASSDAQ is a volatile meme coin with no intrinsic value, no utility beyond entertainment, and no expectation of financial return.
+    $ASSDAQ is for satirical and entertainment purposes only and not backed by any assets, team, or roadmap.
+    When you purchase $ASSDAQ, you agree you've seen this disclaimer and accept all risks at your own expense.
+  </div>
 </body>
 </html>
