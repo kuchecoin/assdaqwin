@@ -257,12 +257,20 @@
         <div class="info-box">
           <div class="contract-row">
             <span class="contract-label">ASSDAQ (SOL):</span>
-            <span class="contract-address" id="solana-address">7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump</span>
+            <span class="contract-address"
+            id="solana-address"
+            data-full="7Tx8qTXSakpfaSFjdztPGQ9n2uyT1eUkYz7gYxxopump">
+            </span>
+
             <button class="copy-btn" onclick="copyToClipboard('solana-address', this)">Copy</button>
           </div>
           <div class="contract-row">
             <span class="contract-label">ASSDAQ (ETH):</span>
-            <span class="contract-address" id="ethereum-address">0xF4F53989d770458B659f8D094b8E31415F68A4Cf</span>
+            <span class="contract-address"
+            id="ethereum-address"
+            data-full="0xF4F53989d770458B659f8D094b8E31415F68A4Cf">
+            </span>
+
             <button class="copy-btn" onclick="copyToClipboard('ethereum-address', this)">Copy</button>
           </div>
 
@@ -279,17 +287,22 @@
 
   <!-- Click to Copy Script -->
   <script>
-    function copyToClipboard(id, button) {
-      const text = document.getElementById(id).textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        const originalText = button.textContent;
-        button.textContent = 'Copied';
-        button.disabled = true;
-        setTimeout(() => {
-          button.textContent = originalText;
-          button.disabled = false;
-        }, 1500);
-      }).catch(err => { console.error('Copy failed:', err); });
+  function copyToClipboard(id, button) {
+    const el = document.getElementById(id);
+    const fullAddress = el.getAttribute("data-full");
+
+    navigator.clipboard.writeText(fullAddress).then(() => {
+      const originalText = button.textContent;
+      button.textContent = 'Copied';
+      button.disabled = true;
+
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+      }, 1500);
+    }).catch(err => {
+      console.error('Copy failed:', err);
+    });
     }
   </script>
 
@@ -323,5 +336,27 @@
     $ASSDAQ is for satirical and entertainment purposes only and not backed by any assets, team, or roadmap.
     When you purchase $ASSDAQ, you agree you've seen this disclaimer and accept all risks at your own expense.
   </div>
+  
+<script>
+  function shortenAddress(address) {
+    return address.slice(0, 6) + "..." + address.slice(-5);
+  }
+
+  function handleResponsiveAddresses() {
+    const isMobile = window.innerWidth <= 768;
+    const addresses = document.querySelectorAll(".contract-address");
+
+    addresses.forEach(el => {
+      const full = el.getAttribute("data-full");
+      if (!full) return;
+
+      el.textContent = isMobile ? shortenAddress(full) : full;
+    });
+  }
+
+  window.addEventListener("DOMContentLoaded", handleResponsiveAddresses);
+  window.addEventListener("resize", handleResponsiveAddresses);
+</script>
+  
 </body>
 </html>
